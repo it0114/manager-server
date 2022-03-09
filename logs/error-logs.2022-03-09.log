@@ -1,0 +1,14 @@
+[2022-03-09T10:47:22.945] [ERROR] error - ReferenceError: ctx is not defined
+    at /Users/yam/Desktop/vue3 后台管理系统/manager-server/app.js:30:3
+    at dispatch (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa/node_modules/koa-compose/index.js:42:32)
+    at views (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa-views/src/index.js:91:12)
+    at dispatch (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa/node_modules/koa-compose/index.js:42:32)
+    at serve (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa-static/index.js:53:15)
+    at async bodyParser (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa-bodyparser/index.js:95:5)
+[2022-03-09T10:48:09.312] [ERROR] error - ReferenceError: ctx is not defined
+    at /Users/yam/Desktop/vue3 后台管理系统/manager-server/app.js:30:5
+    at dispatch (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa/node_modules/koa-compose/index.js:42:32)
+    at views (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa-views/src/index.js:91:12)
+    at dispatch (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa/node_modules/koa-compose/index.js:42:32)
+    at serve (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa-static/index.js:53:15)
+    at async bodyParser (/Users/yam/Desktop/vue3 后台管理系统/manager-server/node_modules/koa-bodyparser/index.js:95:5)

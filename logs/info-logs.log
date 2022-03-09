@@ -1,0 +1,37 @@
+[2022-03-09T10:49:39.349] [INFO] info - {
+  request: {
+    method: 'GET',
+    url: '/',
+    header: {
+      host: '127.0.0.1:3000',
+      connection: 'keep-alive',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '" Not A;Brand";v="99", "Chromium";v="99", "Google Chrome";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'sec-ch-ua-platform': '"macOS"',
+      'upgrade-insecure-requests': '1',
+      'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'cross-site',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9'
+    }
+  },
+  response: {
+    status: 200,
+    message: 'OK',
+    header: [Object: null prototype] {
+      'content-type': 'text/html; charset=utf-8',
+      'content-length': '185'
+    }
+  },
+  app: { subdomainOffset: 2, proxy: false, env: 'development' },
+  originalUrl: '/',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+[2022-03-09T10:50:15.598] [INFO] info - undefined
