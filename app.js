@@ -7,12 +7,16 @@ const bodyparser = require('koa-bodyparser')
 // const logger = require('koa-logger')
 const log4js = require("./utils/log4j")
 
-
+// 路由
 const index = require('./routes')
 const users = require('./routes/users')
 
 // error handler
 onerror(app)
+
+// 数据库
+require("./config/db")
+
 
 // middlewares
 app.use(bodyparser({
