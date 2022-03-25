@@ -30,13 +30,11 @@ const users = require('./routes/users')
 //     })
 // );
 
-
 // error handler
 onerror(app)
 
 // 数据库
 require("./config/db")
-
 
 // middlewares
 app.use(bodyparser({
@@ -50,9 +48,19 @@ app.use(views(__dirname + '/views', {
     extension: 'pug'
 }))
 
+// logger
+app.use(async (ctx, next) => {
+    log4js.info(`get params : ${JSON.stringify(ctx.request.query)}`)
+    log4js.info(`post params : ${JSON.stringify(ctx.request.body)}`)
+    await next()
+})
+
 // routes
+// 1. 一级路由根地址
 router.prefix('/api')
+// 2. 注册二级路由
 router.use(users.routes(), users.allowedMethods())
+// 3. 把路由挂载到 app 上
 app.use(router.routes(), router.allowedMethods())
 
 // error-handling

@@ -27,7 +27,7 @@ router.post("/login", async ctx => {
             ctx.body = util.fail('账号或者密码不正确')
         }
     } catch (e) {
-        // 请求失败的时候会走这个步骤
+        // 请求失败的时候会走这个步骤 (请求错误, 或者数据库挂了)
         ctx.body = util.fail(e.msg)
     }
 })
