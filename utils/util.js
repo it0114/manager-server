@@ -47,5 +47,6 @@ module.exports = {
         return {
             code, data, msg
         }
-    }
+    },
+    CODE
 }

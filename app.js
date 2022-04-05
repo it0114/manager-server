@@ -7,11 +7,23 @@ const bodyparser = require('koa-bodyparser')
 const log4js = require("./utils/log4j")
 const cors = require('koa2-cors')
 const router = require('koa-router')()
+const jwt = require('jsonwebtoken')
+const koajwt = require('koa-jwt')
+const util = require("./utils/util")
+
+/*
+* jsonwebtoken 使用
+* 1. 需要在注册或者登陆账号的时候给 sign 进行签名
+* 2. 需要在需要验证的时候 使用 jwt.verify 进行验证token
+* */
+
 
 // 路由
 const users = require('./routes/users')
-// token
-const jwt = require('jsonwebtoken')
+
+// 配置文件
+const config = require('./config/index.js')
+
 
 // 允许跨域
 app.use(
@@ -49,14 +61,49 @@ app.use(require('koa-static')(__dirname + '/public'))
 app.use(async (ctx, next) => {
     log4js.info(`get params : ${JSON.stringify(ctx.request.query)}`)
     log4js.info(`post params : ${JSON.stringify(ctx.request.body)}`)
-    await next()
+    await next().catch(err => {
+        if (err.status.toString() === '401') {
+            ctx.status = 200   // token 验证失败的时候, 不更改状态码, 而改为更改业务码
+            ctx.body = util.fail('Token 认证失败', util.CODE.AUTH_ERROR)
+        } else {
+            // 如果不是 401 在继续抛出错误
+            throw err
+        }
+    })
 })
+
+// 使用中间件 koa-jwt 进行token验证
+app.use(koajwt({secret: config.SecretKey}).unless({
+    // path: [/^\/api\/users\/login/] // 过滤不需要验证的路由
+    path: ['/api/users/login'] // 过滤不需要验证的路由
+}))
 
 // routes
 // 1. 一级路由根地址
 router.prefix('/api')
+
 // 2. 注册二级路由
 router.use(users.routes(), users.allowedMethods())
+
+// router.get('/leave/count', ctx => {
+//     // console.log(ctx);
+//     const token = ctx.request.header.authorization.split(' ')[1]
+//     // console.log(token);
+//     let payload = jwt.verify(token, config.SecretKey)   // 第二个参数是秘钥, 需要和你加密的时候的秘钥一致
+//     console.log(payload);
+//     ctx.body = {
+//         code: 200,
+//         data: {
+//             count: 10
+//         }
+//     }
+// })
+router.get('/menu/list', ctx => {
+    ctx.body = {
+        code: 200,
+    }
+})
+
 // 3. 把路由挂载到 app 上
 app.use(router.routes(), router.allowedMethods())
 

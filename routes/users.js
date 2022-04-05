@@ -4,6 +4,10 @@
 const router = require('koa-router')()
 const User = require('../models/userSchema')
 const util = require('../utils/util')
+// token
+const jwt = require('jsonwebtoken')
+// 导入配置文件
+const config = require('../config')
 
 // 根路径
 router.prefix('/users')
@@ -19,10 +23,19 @@ router.post("/login", async ctx => {
         const res = await User.findOne({
             userName,
             userPwd
-        })
+        }, 'userId userName userEmail state role deptId roleList') // 指定返回字段
+        let data = res._doc
         // console.log(res);
         if (res) {
-            ctx.body = util.success(res)
+            // 生成 token , res._doc 作为payload , 过期时间为 1小时
+            const token = jwt.sign({
+                data
+            }, config.SecretKey, { // 第二个参数 是秘钥
+                expiresIn: '1h'
+            })
+
+            data.token = token
+            ctx.body = util.success(data)
         } else {
             ctx.body = util.fail('账号或者密码不正确')
         }
